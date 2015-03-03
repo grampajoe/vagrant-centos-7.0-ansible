@@ -1,0 +1,15 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "chef/centos-7.0"
+
+  config.push.define "atlas" do |push|
+    push.app = "grampajoe/centos-7.0-ansible"
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo yum install -y epel-release
+    sudo yum install -y ansible
+  SHELL
+end
